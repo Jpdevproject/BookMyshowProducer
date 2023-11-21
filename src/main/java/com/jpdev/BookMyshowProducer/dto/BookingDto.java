@@ -8,6 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode
 public class BookingDto {
     private Long bookingId;
     private String movieName;

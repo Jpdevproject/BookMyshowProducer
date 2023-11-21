@@ -6,6 +6,7 @@ import com.jpdev.BookMyshowProducer.repository.BookingRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,9 @@ public class BookingServiceImpl implements BookingService{
     private BookingRepository bookingRepository;
     @Override
     public Optional<BookingDetails> bookTickets(BookingDto bookingDto) {
-        BookingDetails bookingDetails=new BookingDetails();
+        if(ObjectUtils.isEmpty((bookingDto))){
+            return Optional.empty();
+        }
         return Optional.of(bookingRepository.save(BookingDetails.builder()
                 .bookingDate(bookingDto.getBookingDate())
                 .customerName(bookingDto.getCustomerName())
